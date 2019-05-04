@@ -16,7 +16,6 @@ class Hebb_Network():
     # The  __init__ is used to initialise newly created instance, and receives parameters
     # the class constructor takes 2 parameters which are biases and weights 
     def __init__(self,biases=None,weights=None):
-        input_units=len(weights)
         if weights is None:
             input_units=2
             self.weights = np.zeros(input_units)
@@ -46,12 +45,14 @@ class Hebb_Network():
         delta_weights=x*y
         self.weights+=delta_weights
         self.biases+=y
+        #print("learning",self.biases,self.weights)
 
     def training_phase(self,x,y):
         for i in range(len(x)):
             y_hat=self.activation_feedforward(x[i,:])
             self.learning(x[i,:],y[i])
             #print(x[i,:], y_hat)
+            #print("Weights",self.weights,self.biases)
             
     def testing_phase(self,x,y):
         print("Final weights: ",self.weights)
